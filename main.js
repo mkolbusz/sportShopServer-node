@@ -9,6 +9,7 @@ let bodyParser = require('body-parser');
 let initializeDatabases = require('./dbs/index');
 let routes = require('./routes/index');
 
+let port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
@@ -32,8 +33,8 @@ initializeDatabases((err, dbs) => {
 
     routes(app, dbs, jwt);
 
-    server.listen(8080, function() {
-        console.log('Listening on port 8080');
+    server.listen(port, function() {
+        console.log('Listening on port ' + port);
     });
 
   
