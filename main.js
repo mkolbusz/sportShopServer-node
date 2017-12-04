@@ -19,17 +19,17 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
-app.use(expressJwt({
-    secret: config.secret,
-    getToken: function (req) {
-        if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
-            return req.headers.authorization.split(' ')[1];
-        } else if (req.query && req.query.token) {
-            return req.query.token;
-        }
-        return null;
-    }
-}).unless({ path: ['/products', '/users/signup', '/users/login','/users/login/google'] }));
+// app.use(expressJwt({
+//     secret: config.secret,
+//     getToken: function (req) {
+//         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
+//             return req.headers.authorization.split(' ')[1];
+//         } else if (req.query && req.query.token) {
+//             return req.query.token;
+//         }
+//         return null;
+//     }
+// }).unless({ path: ['/products', '/users/signup', '/users/login','/users/login/google', '/products/image/upload'] }));
 
 io.origins(['*:*']);
 io.on('connection', (socket) => {

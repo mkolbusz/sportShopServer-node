@@ -2,7 +2,7 @@ let multer  = require('multer')
 let upload = multer({ dest: 'uploads/' })
 let fs = require('fs-extra');
 
-module.exports = (app, dbs) => {
+module.exports = (app, dbs, jwt, io) => {
     app.get('/products', (req, res) => {
         dbs.development.collection('products').find().toArray((err, docs) => {
             return res.json(docs);
@@ -29,6 +29,8 @@ module.exports = (app, dbs) => {
                     })
                 })
             })
+
+            io.emit('new-product', req.body);
             res.header('Access-Control-Allow-Origin','*');
             res.header('Access-Control-Allow-Methods','PUT');
             res.header('Access-Control-Allow-Headers', 'Content-Type');
