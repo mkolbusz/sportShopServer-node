@@ -1,6 +1,7 @@
 let multer  = require('multer')
 let upload = multer({ dest: 'uploads/' })
 let fs = require('fs-extra');
+let objectID = require('mongodb').ObjectID;
 
 module.exports = (app, dbs, jwt, io) => {
     app.get('/products', (req, res) => {
@@ -61,4 +62,15 @@ module.exports = (app, dbs, jwt, io) => {
             })
         })
     });
+
+
+    app.delete('/products/:id', (req, res) => {
+        dbs.development.collection('products').remove({_id: objectID(req.params.id)}, (err, result) => {
+            if(err) {
+                return res.sendStatus(500);
+            }
+            io.emit('remove-product', req.params.id);
+            return res.sendStatus(200);
+        })
+    })
 }
