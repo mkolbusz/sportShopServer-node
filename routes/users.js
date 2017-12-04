@@ -20,7 +20,6 @@ module.exports = (app, dbs, jwt) => {
         let deferred = Q.defer();
         dbs.development.collection('users').findOne({ email: req.body.email }, (err, user) => {
             if (err) deferred.reject(err.name + ': ' + err.message);
-
             if(user && bcrypt.compareSync(req.body.password, user.password)) {
                 deferred.resolve({
                     _id: user._id,

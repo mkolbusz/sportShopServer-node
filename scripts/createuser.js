@@ -1,5 +1,3 @@
-import { exists } from '../../../../../.cache/typescript/2.6/node_modules/@types/fs-extra';
-
 let initializeDatabases = require('../dbs/index');
 let argv = require('process.argv')(process.argv.slice(2));
 let bcrypt = require('bcryptjs');
