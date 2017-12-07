@@ -1,7 +1,5 @@
 let objectID = require('mongodb').ObjectID;
 
-let sendMail = require('../services/orderService');
-
 module.exports = (app, dbs, jwt, io) => {
 
     app.put('/order/new', (req, res) => {
@@ -27,7 +25,6 @@ module.exports = (app, dbs, jwt, io) => {
             }
 
             io.emit('new-order', req.body);
-            //sendMail(req.body.client.email, req.body);
             return  res.sendStatus(200);
         }); 
 
