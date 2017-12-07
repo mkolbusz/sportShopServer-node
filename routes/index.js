@@ -1,14 +1,16 @@
 let verifyToken = require('../middlewares/verifyToken');
 
-module.exports = (app, dbs, jwt, io) => {
+module.exports = (app, dbs, passport, io) => {
 
-    require('./products')(app, dbs, jwt, io);
+    require('./products')(app, dbs, passport, io);
 
-    require('./orders')(app, dbs, jwt, io);
+    require('./orders')(app, dbs, passport, io);
     
-    require('./users')(app, dbs, jwt, io);
+    require('./users')(app, dbs, passport, io);
 
-    require('./promotions')(app, dbs, jwt, io);
+    require('./promotions')(app, dbs, passport, io);
+
+    require('./authentication')(app, dbs, passport, io);
 
     app.options('*', (req, res) => {
         res.header('Access-Control-Allow-Origin','*');
