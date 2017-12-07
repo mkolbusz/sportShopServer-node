@@ -27,7 +27,7 @@ module.exports = (app, dbs, jwt, io) => {
             }
 
             io.emit('new-order', req.body);
-            sendMail(req.body.client.email, req.body);
+            //sendMail(req.body.client.email, req.body);
             return  res.sendStatus(200);
         }); 
 
